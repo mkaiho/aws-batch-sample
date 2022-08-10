@@ -35,6 +35,9 @@
     "@aws-cdk/core:target-partitions": [
       "aws",
       "aws-cn"
-    ]
+    ],
+    "stage": {
+      "name": "aws-batch-sample"
+    }
   }
 }
