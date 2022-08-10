@@ -37,7 +37,13 @@
       "aws-cn"
     ],
     "stage": {
-      "name": "aws-batch-sample"
+      "name": "aws-batch-sample",
+      "jobStatusObserver": {
+        "name": "job-status-observer",
+        "timeout": 300,
+        "memory": 256,
+        "retryAttempts": 0
+      }
     }
   }
 }

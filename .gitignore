@@ -15,6 +15,7 @@
 # vendor/
 
 _deployments/bin/
+_deployments/zip/
 
 .envrc
 

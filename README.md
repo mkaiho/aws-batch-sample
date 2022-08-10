@@ -1,12 +1,34 @@
 # aws-batch-sample
 
-## Deploy
+## Common
 
-```.sh
-cd _deployments/cdk; cdk -c env=stage deploy; cd ../..;
+### Deploy all
+
+```
+cd _deployments/cdk; cdk --all -c env=stage deploy; cd ../..;
 ```
 
-## Run batch
+### Destroy all
+
+```
+cd _deployments/cdk; cdk --all -c env=stage destroy; cd ../..;
+```
+
+## aws-batch-sample
+
+### Deploy
+
+```.sh
+cd _deployments/cdk; cdk -c env=stage deploy AwsBatchSampleStack; cd ../..;
+```
+
+### Destroy
+
+```.sh
+cd _deployments/cdk; cdk -c env=stage destroy AwsBatchSampleStack; cd ../..;
+```
+
+### Run batch
 
 ```.sh
 aws batch submit-job \
@@ -15,8 +37,24 @@ aws batch submit-job \
   --job-definition "aws-batch-sample"
 ```
 
-## Destroy
+## job-status-observer
+
+### Deploy
 
 ```.sh
-cd _deployments/cdk; cdk -c env=stage destroy; cd ../..;
+cd _deployments/cdk; cdk -c env=stage deploy JobStatusObserverStack; cd ../..;
+```
+
+### Destroy
+
+```.sh
+cd _deployments/cdk; cdk -c env=stage destroy JobStatusObserverStack; cd ../..;
+```
+
+### Run function
+
+```.sh
+aws lambda invoke \
+    --function-name job-status-observer-lambda \
+    response.json
 ```
