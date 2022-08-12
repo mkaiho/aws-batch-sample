@@ -9,6 +9,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/batch v1.18.9
 	github.com/go-logr/logr v1.2.3
 	github.com/go-logr/zapr v1.2.3
+	github.com/spf13/cobra v1.5.0
 	go.uber.org/zap v1.22.0
 	golang.org/x/sync v0.0.0-20220722155255-886fb9371eb4
 )
@@ -23,6 +24,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sso v1.11.14 // indirect
 	github.com/aws/aws-sdk-go-v2/service/sts v1.16.11 // indirect
 	github.com/aws/smithy-go v1.12.1 // indirect
+	github.com/inconshreveable/mousetrap v1.0.1 // indirect
+	github.com/spf13/pflag v1.0.5 // indirect
 	go.uber.org/atomic v1.7.0 // indirect
 	go.uber.org/multierr v1.6.0 // indirect
 )
