@@ -43,7 +43,7 @@ export class JobStatusObserverStack extends Stack {
     const jobStatusObserverLambda = new lambda.Function(this, `${appConfig.name}-lambda`, {
       functionName: `${appConfig.name}-lambda`,
       runtime: lambda.Runtime.GO_1_X,
-      code: lambda.Code.fromAsset(path.resolve(__dirname, `../../zip/lambda/${appConfig.name}.zip`)),
+      code: lambda.Code.fromAsset(path.resolve(__dirname, `../../zip/cmd/${appConfig.name}.zip`)),
       handler:  `${appConfig.name}`,
       role: executionRole,
       timeout: Duration.seconds(appConfig.timeout),

@@ -1,6 +1,6 @@
 ROOT_PACKAGE:=github.com/mkaiho/aws-batch-sample
 BIN_DIR:=_deployments/bin
-SRC_DIR:=$(shell go list ./cmd/... ./lambda/...)
+SRC_DIR:=$(shell go list ./cmd/...)
 BINARIES:=$(SRC_DIR:$(ROOT_PACKAGE)/%=$(BIN_DIR)/%)
 ARCHIVE_DIR:=_deployments/zip
 ARCHIVES:=$(SRC_DIR:$(ROOT_PACKAGE)/%=$(ARCHIVE_DIR)/%)
@@ -18,7 +18,6 @@ archive: $(ARCHIVES)
 $(ARCHIVES):$(BINARIES)
 	@test -d $(ARCHIVE_DIR) || mkdir $(ARCHIVE_DIR)
 	@test -d $(ARCHIVE_DIR)/cmd || mkdir $(ARCHIVE_DIR)/cmd
-	@test -d $(ARCHIVE_DIR)/lambda || mkdir $(ARCHIVE_DIR)/lambda
 	@zip -j $@.zip $(@:$(ARCHIVE_DIR)/%=$(BIN_DIR)/%)
 
 .PHONY: dev-deps
