@@ -87,6 +87,28 @@ export class AwsBatchSampleStack extends Stack {
     });
 
     /**
+     * Route
+     */
+     const appRtb = new CfnRouteTable(this, `${context.name}-app-rtb`, {
+      vpcId: vpc.vpcId,
+      tags: [
+        {
+          key: "Name",
+          value: `${context.name}-app-rtb`,
+        },
+      ],
+    });
+    const appRtbAsc = new CfnSubnetRouteTableAssociation(
+      this,
+      `${context.name}-app-rtb-sbn-association`,
+      {
+        routeTableId: appRtb.ref,
+        subnetId: appSubnet.subnetId,
+      }
+    );
+    appRtbAsc.addDependsOn(appRtb)
+
+    /**
      * VPC Endpoint
      */
     const ecrDockerVpce = new InterfaceVpcEndpoint(
@@ -142,27 +164,6 @@ export class AwsBatchSampleStack extends Stack {
     });
 
     /**
-     * Route
-     */
-    const appRtb = new CfnRouteTable(this, `${context.name}-app-rtb`, {
-      vpcId: vpc.vpcId,
-      tags: [
-        {
-          key: "Name",
-          value: `${context.name}-app-rtb`,
-        },
-      ],
-    });
-    new CfnSubnetRouteTableAssociation(
-      this,
-      `${context.name}-app-rtb-sbn-association`,
-      {
-        routeTableId: appRtb.ref,
-        subnetId: appSubnet.subnetId,
-      }
-    );
-
-    /**
      * ECR
      */
     const image = this.synthesizer.addDockerImageAsset({
@@ -189,6 +190,7 @@ export class AwsBatchSampleStack extends Stack {
         },
       }
     );
+    computeEnvironment.addDependsOn(appRtbAsc)
 
     const jobQueue = new CfnJobQueue(this, `${context.name}-job-queue`, {
       jobQueueName: `${context.name}`,
